@@ -3,7 +3,9 @@ import Peer from 'simple-peer'
 import openSocket from "socket.io-client" 
 const SocketContext = createContext()
 
-const socket = openSocket('http://localhost:8080')
+// const socket = openSocket(process.env.REACT_APP_SERVER_SOCKET)
+// const socket = openSocket('ws://localhost:8080')
+const socket = openSocket(process.env.REACT_APP_SERVER)
 
 const ContextProvider = ({ children }) => {
   const [stream, setStream] = useState(null)
