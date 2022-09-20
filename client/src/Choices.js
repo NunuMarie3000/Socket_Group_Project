@@ -4,8 +4,12 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { Button, Form } from 'react-bootstrap'
 
 export default function Choices({ children }) {
-  const { caller, callAccepted, name, setName, callEnded, answerVideoChat,
+  const { caller, callAccepted, setName, callEnded,
     hangUpVideoChat, videoChatUser } = useContext(SocketContext)
+    
+    // this is commented out b/c name and answerVideoChat aren't used...what's that about?
+  // const { caller, callAccepted, name, setName, callEnded, answerVideoChat,
+  //   hangUpVideoChat, videoChatUser } = useContext(SocketContext)
 
   const [idToCall, setIdToCall] = useState('')
 
