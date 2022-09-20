@@ -13,6 +13,7 @@ export default function Choices({ children }) {
     <>
       <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
         <Form style={{ width: '300px', display:'flex', gap:'2rem' }}>
+        
           <Form.Group className="mb-3" controlId="name">
             <Form.Label>Account Info</Form.Label>
             <Form.Control type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
@@ -37,8 +38,8 @@ export default function Choices({ children }) {
             }
           </Form.Group>
         </Form>
+        {children}
       </div>
-
     </>
   )
 }

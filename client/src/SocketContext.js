@@ -3,14 +3,10 @@ import Peer from 'simple-peer'
 import openSocket from "socket.io-client" 
 const SocketContext = createContext()
 
-// import io from "socket.io-client"
-
 const socket = openSocket('http://localhost:8080')
 
 const ContextProvider = ({ children }) => {
   const [stream, setStream] = useState(null)
-  // const [otherStream, setOtherStream] = useState(null)
-
   const [caller, setCaller] = useState("")
   const [call, setCall] = useState({})
   const [callAccepted, setCallAccepted] = useState(false)
@@ -31,7 +27,7 @@ const ContextProvider = ({ children }) => {
       setCaller(id)
     })
 
-    socket.on("callUser", ({ from, name: callerName, signal}) => {
+    socket.on("callUser", ({ from, name:callerName, signal}) => {
       setCall({ isCallRecieved: true, from, name: callerName, signal})
     })
 
@@ -66,7 +62,7 @@ const ContextProvider = ({ children }) => {
       otherCallerVideo.current.srcObject = currentStream
     })
 
-    socket.on("callaccepted", (signal)=> {
+    socket.on("callAccepted", (signal)=> {
       setCallAccepted(true)
       
       peer.signal(signal)

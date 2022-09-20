@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import Video from './Video'
-import Choices from '../Choices'
 
 import { SocketContext } from '../SocketContext'
 
@@ -20,7 +19,6 @@ export default function VideoContainer() {
         {callAccepted && !callEnded && <Video name={call.name || 'Name'} isMuted={false} theRef={otherCallerVideo} />}
 
       </div>
-      <Choices/>
     </>
   )
 }
