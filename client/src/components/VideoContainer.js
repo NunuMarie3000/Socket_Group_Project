@@ -1,44 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-// import io from "socket.io-client"
-import openSocket from "socket.io-client" 
-const socket = openSocket('http://localhost:8080')
+import React, { useContext } from 'react'
+import Video from './Video'
+
+import { SocketContext } from '../SocketContext'
 
 export default function VideoContainer() {
-  // const [roomId, setRoomId] = useState('')
-  // const socket = io('/videochat')
-
-  // const sendSocketIO = () =>{
-  //   socket.emit('example', 'hello from client')
-  // }
-
-  // to get userId for what room to be in,
-  // email.split('@')[0], it'll return the first part
-
-  const getRoomId = async () => {
-    const url = 'http://localhost:8000/videochat'
-    try {
-      const response = await axios.get(url)
-      // setRoomId(response.data)
-      socket.emit('join-room', response.data, 10)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-      getRoomId()
-      //eslint-disable-next-line
-    }, [])
-
+  const { name, callAccepted, callerVideo, otherCallerVideo, callEnded, stream, call } = useContext(SocketContext)
   return (
     <>
       <div style={{
-        display:'grid',
-        gridTemplateColumns: 'auto-fill, 300px',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 300px)',
         gridTemplateRows: '300px',
+        justifyContent: 'center',
+        columnGap: '2rem'
       }}>
-      
+        {stream && <Video name={name || 'Name'} isMuted={true} theRef={callerVideo} />}
+
+        {callAccepted && !callEnded && <Video name={call.name || 'Name'} isMuted={false} theRef={otherCallerVideo} />}
+
       </div>
     </>
   )
